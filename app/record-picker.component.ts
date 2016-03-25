@@ -89,6 +89,7 @@ export class RecordPickerComponent implements OnChanges {
 		if (this.list != this.displayList) {
 			this.displayList = this.list;
 			this.sortDisplayList();
+			this.pickerFilter = '';
 		}
 	}
 
