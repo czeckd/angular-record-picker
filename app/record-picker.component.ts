@@ -10,7 +10,7 @@ import {NgClass,ngStyle} from 'angular2/common';
 	styleUrls: [ 'css/record-picker.css' ],
 	styles: [`
 		.filter-button {
-		    padding: 7px 7px 5px 7px;
+			padding: 0 6px;
 			border-radius: 0 4px 4px 0;
 			box-shadow: none;
 			margin: 8px 8px 8px -4px;
@@ -52,9 +52,7 @@ import {NgClass,ngStyle} from 'angular2/common';
 		<form>
 			<span *ngIf="showFilter===true">
 				<input type="text" [(ngModel)]="pickerFilter" (ngModelChange)="onFilter()" class="filter-input">
-				<button class="filter-button">
-					<img src="images/funnel.svg" class="filter-svg" />
-				</button><br/>
+				<button class="filter-button"><img src="images/funnel.svg" class="filter-svg" />&nbsp;</button><br/>
 			</span>
 			<div class="record-picker" [ngStyle]="{'max-height': height}">
 			<ul>
