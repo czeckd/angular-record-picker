@@ -1,9 +1,5 @@
-import {Component, Input, Output, EventEmitter, OnChanges} from 'angular2/core';
-import {NgClass,ngStyle} from 'angular2/common';
-
-//import {Woodpecker} from './woodpecker';
-
-
+import {Component, Input, Optional, Output, EventEmitter, OnChanges} from 'angular2/core';
+import {NgClass,NgStyle} from 'angular2/common';
 
 @Component({
 	selector: 'record-picker',
@@ -71,14 +67,12 @@ export class RecordPickerComponent implements OnChanges {
 	@Input () list:any;
 	@Input () display:any;
 
-	// http://stackoverflow.com/questions/894860/set-a-default-parameter-value-for-a-javascript-function
-	@Input ('sort') keepSorted:boolean = this.sort || false;
-	@Input ('filter') filterKey:string = this.filterKey || '_name';
+	@Input ('sort') keepSorted:boolean = typeof this.keepSorted !== "undefined" ? this.keepSorted : false;
+	@Input ('filter') filterKey:string = typeof this.filterKey !== "undefined" ? this.filterKey : '_name';
 	@Input ('show-filter') showFilter:boolean = typeof this.showFilter !== "undefined" ? this.showFilter : true;
-	@Input () height:string = this.height || '255px';
+	@Input () height:string = typeof this.height !== "undefined" ? this.height : '260px';
 	@Input ('has-new') hasNew:boolean = false;
 
-	// http://stackoverflow.com/questions/35623868/angular2-two-way-binding-inside-parent-child-component
 	@Input () record;
 	@Output () recordChange = new EventEmitter();
 
@@ -101,8 +95,12 @@ export class RecordPickerComponent implements OnChanges {
 	onFilter() {
 		if (this.pickerFilter.length > 0) {
 			this.displayList = this.list.filter( item => { 
-				if (Object.prototype.toString.call(item) === '[object Object]' && item[this.filterKey]._name !== undefined) {
-					return item[this.filterKey].toLowerCase().indexOf(this.pickerFilter.toLowerCase()) !== -1; 
+				if (Object.prototype.toString.call(item) === '[object Object]') {
+					if (item[this.filterKey] !== undefined) {
+						return item[this.filterKey].toLowerCase().indexOf(this.pickerFilter.toLowerCase()) !== -1;
+					} else {
+						return JSON.stringify(item).toLowerCase().indexOf(this.pickerFilter.toLowerCase()) !== -1;
+					}
 				} else {
 					return item.toLowerCase().indexOf(this.pickerFilter.toLowerCase()) !== -1;
 				}
@@ -181,5 +179,4 @@ export class RecordPickerComponent implements OnChanges {
 				}
 		}
 	}
-
 }
