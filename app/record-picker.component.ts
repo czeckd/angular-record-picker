@@ -86,10 +86,12 @@ export class RecordPickerComponent implements OnChanges {
 	}
 
 	ngOnChanges(changeRecord) {
-		if (this.list != this.displayList) {
+		if (changeRecord.list && changeRecord.list.currentValue != changeRecord.list.previousValue) {
+//		if (this.list != this.displayList) {
 			this.displayList = this.list;
 			this.sortDisplayList();
 			this.pickerFilter = '';
+			this.onFilter();
 		}
 	}
 
