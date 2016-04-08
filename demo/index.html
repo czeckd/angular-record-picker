@@ -3,8 +3,7 @@
 	<head>
 		<title>Angular 2 Record Picker Demo</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">    
-
-
+		<base href="../">
 
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
 
@@ -24,18 +23,17 @@
 
 		<!-- IE required polyfills, in this exact order -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min.js"></script> 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.24/system-polyfills.js"></script> 
-		<script src="https://npmcdn.com/angular2@2.0.0-beta.11/es6/dev/src/testing/shims_for_IE.js"></script> 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.25/system-polyfills.js"></script> 
+		<script src="https://npmcdn.com/angular2@2.0.0-beta.14/es6/dev/src/testing/shims_for_IE.js"></script> 
 
 
-		<script src="https://code.angularjs.org/2.0.0-beta.11/angular2-polyfills.js"></script> 
+		<script src="https://code.angularjs.org/2.0.0-beta.14/angular2-polyfills.js"></script> 
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.24/system.src.js"></script>
-		<script src="https://code.angularjs.org/2.0.0-beta.11/Rx.js"></script>
-		<script src="https://code.angularjs.org/2.0.0-beta.11/angular2.dev.js"></script>
-		<script src="https://code.angularjs.org/2.0.0-beta.11/http.dev.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.25/system.src.js"></script>
+		<script src="https://code.angularjs.org/2.0.0-beta.14/Rx.js"></script>
+		<script src="https://code.angularjs.org/2.0.0-beta.14/angular2.dev.js"></script>
+		<script src="https://code.angularjs.org/2.0.0-beta.14/http.dev.js"></script>
 
-		<base href="../">
 
 		<!-- 2. Configure SystemJS -->
 		<script>
@@ -50,11 +48,11 @@
 
 			// Map tells the System loader where to look for things
 			map: {
-				app: "../app"
+				app: "app"
 			},
 			packages: {
 				app: {
-					main: '../app/main.ts',
+					main: 'app/main.ts',
 					defaultExtension: 'ts'
 				}
 			}
