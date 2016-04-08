@@ -1,4 +1,4 @@
-import {Component, Input, Optional, Output, EventEmitter, OnChanges} from 'angular2/core';
+import {Component, Input, Output, EventEmitter, OnChanges} from 'angular2/core';
 import {NgClass,NgStyle} from 'angular2/common';
 
 @Component({
@@ -67,10 +67,10 @@ export class RecordPickerComponent implements OnChanges {
 	@Input () list:any;
 	@Input () display:any;
 
-	@Input ('sort') keepSorted:boolean = typeof this.keepSorted !== "undefined" ? this.keepSorted : false;
-	@Input ('filter') filterKey:string = typeof this.filterKey !== "undefined" ? this.filterKey : '_name';
-	@Input ('show-filter') showFilter:boolean = typeof this.showFilter !== "undefined" ? this.showFilter : true;
-	@Input () height:string = typeof this.height !== "undefined" ? this.height : '260px';
+	@Input ('sort') keepSorted:boolean = typeof this.keepSorted !== 'undefined' ? this.keepSorted : false;
+	@Input ('filter') filterKey:string = typeof this.filterKey !== 'undefined' ? this.filterKey : '_name';
+	@Input ('show-filter') showFilter:boolean = typeof this.showFilter !== 'undefined' ? this.showFilter : true;
+	@Input () height:string = typeof this.height !== 'undefined' ? this.height : '260px';
 	@Input ('has-new') hasNew:boolean = false;
 
 	@Input () record;
@@ -87,12 +87,12 @@ export class RecordPickerComponent implements OnChanges {
 
 	ngOnChanges(changeRecord) {
 		if (changeRecord.list) {
-			if (this.list != this.displayList) {
+			if (this.list !== this.displayList) {
 				this.displayList = this.list;
 				this.sortDisplayList();
 			}
 
-			if (changeRecord.list.currentValue != changeRecord.list.previousValue) {
+			if (changeRecord.list.currentValue !== changeRecord.list.previousValue) {
 				this.pickerFilter = '';
 			}
 		}
@@ -100,7 +100,7 @@ export class RecordPickerComponent implements OnChanges {
 
 	onFilter() {
 		if (this.pickerFilter.length > 0) {
-			this.displayList = this.list.filter( item => { 
+			this.displayList = this.list.filter( item => {
 				if (Object.prototype.toString.call(item) === '[object Object]') {
 					if (item[this.filterKey] !== undefined) {
 						return item[this.filterKey].toLowerCase().indexOf(this.pickerFilter.toLowerCase()) !== -1;
@@ -167,7 +167,6 @@ export class RecordPickerComponent implements OnChanges {
 						}
 					}
 				}
-					
 				return str;
 			} else {
 				return this.displayList[idx][this.display];

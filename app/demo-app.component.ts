@@ -19,12 +19,9 @@ import {RecordPickerComponent} from './record-picker.component';
 `
 })
 
-export class DemoAppComponent { 
-	
-	private hasNew:boolean = false;
-	private record:any;
+export class DemoAppComponent {
 
-	private static StrTubeStops:Array<string> = [ 
+	private static StrTubeStops:Array<string> = [
 		'Harrow & Wealdstone',
 		'Kenton',
 		'South Kenton',
@@ -81,6 +78,8 @@ export class DemoAppComponent {
 	];
 
 	private stops:any = DemoAppComponent.StrTubeStops;
+	private hasNew:boolean = false;
+	private record:any;
 
 	toggle() {
 		this.record = undefined;
