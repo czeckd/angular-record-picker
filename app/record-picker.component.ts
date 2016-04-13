@@ -1,54 +1,40 @@
 import {Component, Input, Output, EventEmitter, OnChanges} from 'angular2/core';
-import {NgClass,NgStyle} from 'angular2/common';
+import {NgClass, NgStyle} from 'angular2/common';
 
 @Component({
 	selector: 'record-picker',
 	styleUrls: [ 'css/record-picker.css' ],
+	directives: [ NgClass, NgStyle ],
 	styles: [`
-		.filter-button {
-			padding: 0 6px;
-			border-radius: 0 4px 4px 0;
-			box-shadow: none;
-			margin: 8px 8px 8px -4px;
-			font-size: 0.85em;
-			font-weight: 600;
-			color: #fff;
-			vertical-align: middle;
-			line-height: 1.550em;
-			border: 1px solid #a7a7a7;
-			color: #303030;
-			background: #bfbfbf;
-			background: linear-gradient(to bottom, #f0f0f0 0%,#bfbfbf 50%,#bfbfbf 51%,#bfbfbf 100%);
-			cursor: pointer;
-		}
 		.filter-input {
-			font-size: 1.0em;
-			width: 134px;
-			display: inline-block;
+			font-size: 1em;
 			float: none;
 			vertical-align: middle;
-			border-radius: 5px 0 0 5px;
+			border-radius: 5px;
+			margin-bottom: 10px;
 			border: 1px solid #7c7c7c;
-			padding: 1px 4px;
+			padding: 1px 4px; 
 			box-shadow: inset 1px 1px 1px #c6c6c6;
 			color: #303030;
 		}
-		.filter-svg {
-			height:1em;
-			width:1em;
-			fill:#000;
-			display:inline-block;
-			vertical-align:middle;
-			position:relative;
-			top:-1px;
-			margin:-3px;
+		span::after {
+			content:"X";
+			color:transparent;
+			font-size:2em;
+			background-image:url('images/funnel.svg');
+			background-repeat:no-repeat;
+			opacity: 0.2;
+			left:-25px;
+			top:14px;
+			position: relative; 
+			height:16px;
+			width:16px;
 		}
 	`],
 	template: `
 		<form>
 			<span *ngIf="showFilter===true">
 				<input type="text" [(ngModel)]="pickerFilter" (ngModelChange)="onFilter()" class="filter-input">
-				<button class="filter-button"><img src="images/funnel.svg" class="filter-svg" />&nbsp;</button><br/>
 			</span>
 			<div class="record-picker" [ngStyle]="{'max-height': height}">
 			<ul>
@@ -59,9 +45,7 @@ import {NgClass,NgStyle} from 'angular2/common';
 			</ul>
 		</div>
 	</form>`
-
 })
-
 
 export class RecordPickerComponent implements OnChanges {
 	@Input () list:any;
