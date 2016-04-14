@@ -1,5 +1,4 @@
 div.record-picker {
-	width: 155px;
 	overflow-x: hidden;
 	overflow-y: auto;
 	border: 1px solid #ddd;
@@ -83,3 +82,4 @@ div.record-picker::-webkit-scrollbar-thumb:hover {
 	border-bottom-right-radius: 8px;
 	border-bottom: none;
 }
+

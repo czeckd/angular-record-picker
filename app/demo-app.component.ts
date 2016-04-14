@@ -9,12 +9,14 @@ import {RecordPickerComponent} from './record-picker.component';
 		<div style="margin:25px;">
 			<form>
 				<label><strong>Type of array: </strong></label>
-				<label><input type="radio" name="tubedata" checked (click)="toggle()">strings</label>
-				<label><input type="radio" name="tubedata" (click)="toggle()">objects</label>
+				<label><input type="radio" name="tubedata" (click)="toggle()">strings</label>
+				<label><input type="radio" name="tubedata" checked (click)="toggle()">objects</label>
 			</form>
 
-			<p>Selected Record: {{record|json}}</p>
-			<record-picker [list]="stops" [(record)]="record" [has-new]="hasNew"></record-picker>
+			<p><strong>Selected Record:</strong> {{record|json}}</p>
+			<div style="width:200px;">
+				<record-picker [list]="stops" [(record)]="record" [has-new]="hasNew"></record-picker>
+			</div>
 		</div>
 `
 })
@@ -77,7 +79,7 @@ export class DemoAppComponent {
 		{ _id: 25, _name: 'Elephant & Castle' }
 	];
 
-	private stops:any = DemoAppComponent.StrTubeStops;
+	private stops:any = DemoAppComponent.ObjTubeStops;
 	private hasNew:boolean = false;
 	private record:any;
 
