@@ -6,45 +6,53 @@ import {NgClass, NgStyle} from 'angular2/common';
 	styleUrls: [ 'css/record-picker.css' ],
 	directives: [ NgClass, NgStyle ],
 	styles: [`
-		.filter-input {
-			font-size: 1em;
-			float: none;
-			vertical-align: middle;
-			border-radius: 5px;
-			margin-bottom: 10px;
-			border: 1px solid #7c7c7c;
-			padding: 1px 4px; 
-			box-shadow: inset 1px 1px 1px #c6c6c6;
-			color: #303030;
+
+		.filter {
+			margin-bottom: -2em;
 		}
-		span::after {
-			content:"X";
+
+		.filter::after {
+			content:"o";
+			width:40px;
 			color:transparent;
 			font-size:2em;
 			background-image:url('images/funnel.svg');
 			background-repeat:no-repeat;
-			opacity: 0.2;
-			left:-25px;
-			top:14px;
-			position: relative; 
-			height:16px;
-			width:16px;
+			background-position:center center;
+			opacity:.2;
+			top: -31px;
+			left: calc(100% - 21px);
+			position:relative;
+		}
+
+		.filter-input {
+			display: block;
+			width:100%;
+			padding: 1px 4px; 
+			font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+			font-size: 1em;
+			color: #303030;
+			float: none;
+			border-radius: 5px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+			box-sizing: border-box;
 		}
 	`],
 	template: `
 		<form>
-			<span *ngIf="showFilter===true">
+			<div *ngIf="showFilter" class="filter">
 				<input type="text" [(ngModel)]="pickerFilter" (ngModelChange)="onFilter()" class="filter-input">
-			</span>
+ 			</div>
 			<div class="record-picker" [ngStyle]="{'max-height': height}">
-			<ul>
-				<li *ngFor="#rec of displayList; #i=index" (click)="selectRecord(rec)" [ngClass]="{selected:rec===record, disabled:hasNew}">
-					<label>{{getLabel(i)}}</label>
-				</li>
-				<li *ngIf="displayList?.length===0"><label>&nbsp;</label></li>
-			</ul>
-		</div>
-	</form>`
+				<ul>
+					<li *ngFor="#rec of displayList; #i=index" (click)="selectRecord(rec)" [ngClass]="{selected:rec===record, disabled:hasNew}">
+						<label>{{getLabel(i)}}</label>
+					</li>
+					<li *ngIf="displayList?.length===0"><label>&nbsp;</label></li>
+				</ul>
+			</div>
+		</form>`
 })
 
 export class RecordPickerComponent implements OnChanges {
