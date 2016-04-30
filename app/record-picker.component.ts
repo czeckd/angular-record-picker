@@ -44,9 +44,9 @@ import {NgClass, NgStyle} from 'angular2/common';
 			<div *ngIf="showFilter" class="filter">
 				<input type="text" [(ngModel)]="pickerFilter" (ngModelChange)="onFilter()" class="filter-input">
  			</div>
-			<div class="record-picker" [ngStyle]="{'max-height': height}">
+			<div class="record-picker" [ngStyle]="{'max-height': height, 'min-height': height}">
 				<ul>
-					<li *ngFor="#rec of displayList; #i=index" (click)="selectRecord(rec)" [ngClass]="{selected:rec===record, disabled:hasNew}">
+					<li *ngFor="let rec of displayList;let i=index" (click)="selectRecord(rec)" [ngClass]="{selected:rec===record, disabled:hasNew}">
 						<label>{{getLabel(i)}}</label>
 					</li>
 					<li *ngIf="displayList?.length===0"><label>&nbsp;</label></li>
@@ -108,7 +108,7 @@ export class RecordPickerComponent implements OnChanges {
 		}
 	}
 
-	selectRecord (rec) {
+	selectRecord(rec:any) {
 		if (!this.hasNew) {
 			if (this.record === rec) {
 				this.record = null;
