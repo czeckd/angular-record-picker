@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter, OnChanges} from 'angular2/core';
-import {NgClass, NgStyle} from 'angular2/common';
+import { Component, Input, EventEmitter, OnChanges, Output, SimpleChange } from '@angular/core';
+import { NgClass, NgStyle } from '@angular/common';
 
 @Component({
 	selector: 'record-picker',
@@ -65,7 +65,7 @@ export class RecordPickerComponent implements OnChanges {
 	@Input () height:string = typeof this.height !== 'undefined' ? this.height : '260px';
 	@Input ('has-new') hasNew:boolean = false;
 
-	@Input () record;
+	@Input () record:any;
 	@Output () recordChange = new EventEmitter();
 
 	private pickerFilter:string = '';
@@ -77,14 +77,14 @@ export class RecordPickerComponent implements OnChanges {
 		}
 	}
 
-	ngOnChanges(changeRecord) {
-		if (changeRecord.list) {
+	ngOnChanges(changeRecord : { [key:string] : SimpleChange }) {
+		if (changeRecord['list']) {
 			if (this.list !== this.displayList) {
 				this.displayList = this.list;
 				this.sortDisplayList();
 			}
 
-			if (changeRecord.list.currentValue !== changeRecord.list.previousValue) {
+			if (changeRecord['list'].currentValue !== changeRecord['list'].previousValue) {
 				this.pickerFilter = '';
 			}
 		}
@@ -92,7 +92,7 @@ export class RecordPickerComponent implements OnChanges {
 
 	onFilter() {
 		if (this.pickerFilter.length > 0) {
-			this.displayList = this.list.filter( item => {
+			this.displayList = this.list.filter( (item:any) => {
 				if (Object.prototype.toString.call(item) === '[object Object]') {
 					if (item[this.filterKey] !== undefined) {
 						return item[this.filterKey].toLowerCase().indexOf(this.pickerFilter.toLowerCase()) !== -1;

@@ -1,6 +1,6 @@
-import {Component} from 'angular2/core';
+import { Component } from '@angular/core';
 
-import {RecordPickerComponent} from './record-picker.component';
+import { RecordPickerComponent } from './record-picker.component';
 
 @Component({
     selector: 'demo-app',
@@ -80,7 +80,9 @@ export class DemoAppComponent {
 	];
 
 	private stops:any = DemoAppComponent.ObjTubeStops;
+	/* tslint:disable:no-unused-variable */
 	private hasNew:boolean = false;
+	/* tslint:enable:no-unused-variable */
 	private record:any;
 
 	toggle() {

@@ -16,7 +16,7 @@ Bakerloo Line and allows for them to be picked.
 Copy the `record-picker.css` and link it in the application's `index.html` 
 file. Copy `record-picker.component.ts` into your app and then import the
 `RecordPickerComponent` into a component and include it in that component's
-directives. For a usage example, see `demo-app.component.ts`. and
+directives. For a usage example, see `demo-app.component.ts`.
 
 ### Getting started
 

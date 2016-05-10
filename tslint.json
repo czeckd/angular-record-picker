@@ -3,34 +3,58 @@
 		"class-name": true,
 		"curly": false,
 		"eofline": true,
+		"forin": true,
 		"indent": "tabs",
-		"max-line-length": [true, 140],
-		"member-ordering": [true,
+		"label-position": true,
+		"label-undefined": true,
+		"max-line-length": [
+			true, 
+			140
+		],
+		"member-ordering": [
+			true,
 			"private-before-public",
 			"static-before-instance",
 			"variables-before-functions"
 		],
 		"no-arg": true,
+		"no-bitwise": true,
 		"no-construct": true,
 		"no-duplicate-key": true,
 		"no-duplicate-variable": true,
 		"no-empty": true,
 		"no-eval": true,
+		"no-inferrable-types": false,
+		"no-shadowed-variable": true,
+		"no-string-literal": false,
+		"no-switch-case-fall-through": true,
 		"no-trailing-whitespace": true,
 		"no-unused-expression": true,
 		"no-unused-variable": true,
 		"no-unreachable": true,
 		"no-use-before-declare": true,
-		"one-line": [true,
+		"no-var-keyword": true,
+		"object-literal-sort-keys": false,
+		"one-line": [
+			true,
 			"check-open-brace",
 			"check-catch",
 			"check-else",
 			"check-whitespace"
 		],
-		"quotemark": [true, "single"],
-		"semicolon": true,
-		"triple-equals": true,
+		"quotemark": [
+			true, 
+			"single",
+			"avoid-escape"
+		],
+		"radix": true,
+		"semicolon": [
+			"always"
+		],
+		"triple-equals": [
+			true,
+			"allow-null-check"
+		],
 		"variable-name": false
 	}
 }
-
