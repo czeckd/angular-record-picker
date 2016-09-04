@@ -1,10 +1,8 @@
 import { Component, Input, EventEmitter, OnChanges, Output, SimpleChange } from '@angular/core';
-import { NgClass, NgStyle } from '@angular/common';
 
 @Component({
 	selector: 'record-picker',
 	styleUrls: [ 'css/record-picker.css' ],
-	directives: [ NgClass, NgStyle ],
 	styles: [`
 
 		.filter {
@@ -28,7 +26,7 @@ import { NgClass, NgStyle } from '@angular/common';
 		.filter-input {
 			display: block;
 			width:100%;
-			padding: 1px 4px; 
+			padding: 1px 4px;
 			font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
 			font-size: 1em;
 			color: #303030;
@@ -42,7 +40,7 @@ import { NgClass, NgStyle } from '@angular/common';
 	template: `
 		<form>
 			<div *ngIf="showFilter" class="filter">
-				<input type="text" [(ngModel)]="pickerFilter" (ngModelChange)="onFilter()" class="filter-input">
+				<input type="text" name="picker" [(ngModel)]="pickerFilter" (ngModelChange)="onFilter()" class="filter-input">
  			</div>
 			<div class="record-picker" [ngStyle]="{'max-height': height, 'min-height': height}">
 				<ul>

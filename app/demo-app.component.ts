@@ -4,7 +4,6 @@ import { RecordPickerComponent } from './record-picker.component';
 
 @Component({
     selector: 'demo-app',
-	directives: [ RecordPickerComponent ],
 	template:`
 		<div style="margin:25px;">
 			<form>
