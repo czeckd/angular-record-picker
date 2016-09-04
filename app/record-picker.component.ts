@@ -1,10 +1,8 @@
 import { Component, Input, EventEmitter, OnChanges, Output, SimpleChange } from '@angular/core';
-import { NgClass, NgStyle } from '@angular/common';
 
 @Component({
 	selector: 'record-picker',
 	styleUrls: [ 'css/record-picker.css' ],
-	directives: [ NgClass, NgStyle ],
 	styles: [`
 
 		.filter {
@@ -28,22 +26,22 @@ import { NgClass, NgStyle } from '@angular/common';
 		.filter-input {
 			display: block;
 			width:100%;
-			padding: 1px 4px; 
+			padding: 1px 4px;
 			font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
 			font-size: 1em;
 			color: #303030;
 			float: none;
 			border-radius: 5px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
 			box-sizing: border-box;
 		}
 	`],
 	template: `
 		<form>
 			<div *ngIf="showFilter" class="filter">
-				<input type="text" [(ngModel)]="pickerFilter" (ngModelChange)="onFilter()" class="filter-input">
- 			</div>
+				<input type="text" name="picker" [(ngModel)]="pickerFilter" (ngModelChange)="onFilter()" class="filter-input">
+			</div>
 			<div class="record-picker" [ngStyle]="{'max-height': height, 'min-height': height}">
 				<ul>
 					<li *ngFor="let rec of displayList;let i=index" (click)="selectRecord(rec)" [ngClass]="{selected:rec===record, disabled:hasNew}">
@@ -56,7 +54,7 @@ import { NgClass, NgStyle } from '@angular/common';
 })
 
 export class RecordPickerComponent implements OnChanges {
-	@Input () list:any;
+	@Input () list:Array<any>;
 	@Input () display:any;
 
 	@Input ('sort') keepSorted:boolean = typeof this.keepSorted !== 'undefined' ? this.keepSorted : false;
@@ -88,6 +86,10 @@ export class RecordPickerComponent implements OnChanges {
 				this.pickerFilter = '';
 			}
 		}
+
+		if (changeRecord['hasNew']) {
+			this.sortDisplayList();
+		}
 	}
 
 	onFilter() {
@@ -106,6 +108,7 @@ export class RecordPickerComponent implements OnChanges {
 		} else {
 			this.displayList = this.list;
 		}
+		this.sortDisplayList();
 	}
 
 	selectRecord(rec:any) {
@@ -120,7 +123,7 @@ export class RecordPickerComponent implements OnChanges {
 	}
 
 	getLabel(idx:number) {
-		let i:number, str:string = '', s:string, parts:Array<string>, nums:Array<string>;
+		let i:number, str = '', s:string, parts:Array<string>, nums:Array<string>;
 
 		if (this.display !== undefined) {
 			if (Object.prototype.toString.call( this.display ) === '[object Array]' ) {
@@ -140,7 +143,7 @@ export class RecordPickerComponent implements OnChanges {
 						if (s) {
 							// Use brute force
 							if (parts[1].indexOf('substring') !== -1) {
-								nums = (parts[1].substring(parts[1].indexOf('(')+1, parts[1].indexOf(')'))).split(',');
+								nums = (parts[1].substring(parts[1].indexOf('(') + 1, parts[1].indexOf(')'))).split(',' );
 								switch (nums.length) {
 								case 1:
 									str = str + s.substring(parseInt(nums[0], 10));

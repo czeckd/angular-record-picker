@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 
-import { RecordPickerComponent } from './record-picker.component';
-
 @Component({
-    selector: 'demo-app',
-	directives: [ RecordPickerComponent ],
+	selector: 'demo-app',
 	template:`
 		<div style="margin:25px;">
 			<form>
