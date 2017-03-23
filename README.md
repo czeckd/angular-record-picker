@@ -1,4 +1,4 @@
-# angular2-record-picker
+# angular-record-picker
 
 The record-picker is an Angular 2 component that works similiarly to a select 
 input item, but displays all the choices before and after the selection is 
@@ -7,7 +7,7 @@ display in the pick list.
 
 ## Demo
 
-A [working demo](http://czeckd.github.io/angular2-record-picker/demo/) shows
+A [working demo](http://czeckd.github.io/angular-record-picker/demo/) shows
 the component in action. The demo shows London Underground stops from the 
 Bakerloo Line and allows for them to be picked.
 
