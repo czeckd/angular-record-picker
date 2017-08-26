@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
 
 			<p><strong>Selected Record:</strong> {{record|json}}</p>
 			<div style="width:200px;">
-				<record-picker [list]="stops" [(record)]="record" [has-new]="hasNew"></record-picker>
+				<record-picker [list]="stops" [(record)]="record"></record-picker>
 			</div>
 		</div>
 `
@@ -77,9 +77,6 @@ export class DemoAppComponent {
 	];
 
 	private stops:any = DemoAppComponent.ObjTubeStops;
-	/* tslint:disable:no-unused-variable */
-	private hasNew:boolean = false;
-	/* tslint:enable:no-unused-variable */
 	private record:any;
 
 	toggle() {
