@@ -13,30 +13,27 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "lint": "tslint -c tslint.json app/**/*.ts -t verbose || true",
-    "vlint": "tslint --version",
-    "lite": "lite-server",
-    "postinstall": "typings install",
-    "typings": "typings"
+    "lite": "lite-server"
   },
   "dependencies": {
-    "@angular/common": "~2.1.0",
-    "@angular/compiler": "~2.1.0",
-    "@angular/core": "~2.1.0",
-    "@angular/forms": "~2.1.0",
-    "@angular/platform-browser":  "~2.1.0",
-    "@angular/platform-browser-dynamic": "~2.1.0",
-    
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@types/core-js": "^0.9.39",
+    "@types/node": "^6.0.60",
     "core-js": "^2.4.1",
-    "systemjs": "0.19.39",
-    "reflect-metadata": "^0.1.8",
-    "rxjs": "5.0.0-beta.12",
-    "zone.js": "^0.6.25"
+    "systemjs": "0.19.47",
+    "rxjs": "^5.2.0",
+    "zone.js": "^0.8.12"
   },
   "devDependencies": {
     "concurrently": "^2.2.0",
     "lite-server": "^2.2.2",
-    "typescript": "^2.0.3",
-    "typings":"^1.4.0",
-    "tslint":"^3.15.1"
+    "typescript": "~2.2.0",
+    "tslint": "~4.5.0"
   }
 }
