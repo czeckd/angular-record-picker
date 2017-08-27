@@ -5,7 +5,7 @@ import { BasicList } from './basic-list';
 
 @Component({
 	selector: 'record-picker',
-	styleUrls: [ 'app/record-picker.component.css' ],
+	styleUrls: [ './record-picker.component.css' ],
 	template: `
 <form>
 	<div *ngIf="filter" class="filter">
@@ -34,6 +34,7 @@ export class RecordPickerComponent implements DoCheck, OnChanges {
 	@Input() height = '260px';
 	@Input() disabled = false;
 	@Input() sort = true;
+	@Input() first = false;
 
 	@Input() record:any = null;
 	@Output() recordChange = new EventEmitter();
@@ -45,26 +46,32 @@ export class RecordPickerComponent implements DoCheck, OnChanges {
 
 	@HostListener('keydown', ['$event'])
 	onKeyDown(event:KeyboardEvent) {
-		event.stopPropagation();
-		const key = event.key.toLowerCase();
-		let dir = 0;
-		if (key.indexOf('down') !== -1) {
-			dir = 1;
-		} else if (key.indexOf('up') !== -1) {
-			dir = -1;
-		}
-		this.nextRecord(dir);
-
-		const selected = this.elem.nativeElement.getElementsByClassName('selected');
-		if (selected[0]) {
-			event.preventDefault();
-			try {
-				const el = (dir < 0 ? selected[0].previousSibling : selected[0]);
-				el.scrollIntoView();
+		const target:any = event.target;
+		if (target.tagName.toLowerCase() !== 'input') {
+			const key = event.key.toLowerCase();
+			let dir = 0;
+			if (key.indexOf('down') !== -1) {
+				dir = 1;
+			} else if (key.indexOf('up') !== -1) {
+				dir = -1;
 			}
-			/* tslint:disable:no-empty */
-			catch (ignore) {}
-	       /* tslint:enable:no-empty */
+
+			if (dir) {
+				event.stopPropagation();
+				this.nextRecord(dir);
+
+				const selected = this.elem.nativeElement.getElementsByClassName('selected');
+				if (selected[0]) {
+					event.preventDefault();
+					try {
+						const el = (dir < 0 ? selected[0].previousSibling : selected[0]);
+						el.scrollIntoView();
+					}
+					/* tslint:disable:no-empty */
+					catch (ignore) {}
+					/* tslint:enable:no-empty */
+				}
+			}
 		}
 	}
 
@@ -86,7 +93,6 @@ export class RecordPickerComponent implements DoCheck, OnChanges {
 			this.onFilter(this.available);
 		}
 	}
-
 
 	buildAvailable(source:Array<any>) : boolean {
 		let sourceChanges = this.sourceDiffer.diff(source);
@@ -110,6 +116,10 @@ export class RecordPickerComponent implements DoCheck, OnChanges {
 			}
 			this.available.sift = this.available.list;
 
+			if (this.first) {
+				this.selectRecord(this.available.sift[0]);
+			}
+
 			return true;
 		}
 		return false;
@@ -118,29 +128,33 @@ export class RecordPickerComponent implements DoCheck, OnChanges {
 	updatedSource() {
 		this.available.list.length = 0;
 
-		if (this.list !== undefined) {
+//		if (this.list !== undefined) {
+		if (this.list) {
 			this.sourceDiffer = this.differs.find(this.list).create(null);
 		}
 	}
 
 	// https://stackoverflow.com/a/16552413
 	getPropertyByKeyPath(item:any, keyPath:string) {
-		let keys = keyPath.split('.');
-		if (keys.length === 0) {
-			return undefined;
-		}
-		keys = keys.reverse();
-
-		let subItem = item;
-		while (keys.length) {
-			const k = keys.pop();
-			if (!subItem.hasOwnProperty(k)) {
+		if (item) {
+			let keys = keyPath.split('.');
+			if (keys.length === 0) {
 				return undefined;
-			} else {
-				subItem = subItem[k];
 			}
+			keys = keys.reverse();
+
+			let subItem = item;
+			while (keys.length) {
+				const k = keys.pop();
+				if (!subItem.hasOwnProperty(k)) {
+					return undefined;
+				} else {
+					subItem = subItem[k];
+				}
+			}
+			return subItem;
 		}
-		return subItem;
+		return undefined;
 	}
 
 	findItemIndex(list:Array<any>, item:any, key:any = '_id') {
@@ -195,17 +209,13 @@ export class RecordPickerComponent implements DoCheck, OnChanges {
 
 	selectRecord(rec:any) {
 		if (!this.disabled) {
-			if (this.record === rec) {
+			if (this.record === rec._record) {
 				this.record = null;
 			} else {
-				this.record = rec;
+				this.record = rec._record;
 				this.elem.nativeElement.focus();
 			}
-			if (this.record) {
-				this.recordChange.emit(this.record._record);
-			} else {
-				this.recordChange.emit(null);
-			}
+			this.recordChange.emit(this.record);
 		}
 	}
 
